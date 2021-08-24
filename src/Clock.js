@@ -7,12 +7,6 @@ const Clock = () => {
   const [seconds, setClockSeconds] = useState("");
 
   const formatTime = (time) => (time < 10 ? `0${time}` : time);
-
-  useEffect(() => {
-    setInterval(getClockParameters, 1000);
-    //getClockParameters();
-  }, [hours, minutes, seconds]);
-
   const getClockParameters = () => {
     const date = new Date();
     const dateHours = formatTime(date.getHours());
@@ -23,6 +17,10 @@ const Clock = () => {
     setClockSeconds(dateSeconds);
   };
 
+  useEffect(() => {
+    setInterval(getClockParameters, 1000);
+  }, [hours, minutes, seconds, getClockParameters]);
+
   const secondsStyle = {
     transform: `rotate(${seconds * 6}deg)`,
   };
@@ -32,7 +30,7 @@ const Clock = () => {
   const hoursStyle = {
     transform: `rotate(${hours * 30}deg)`,
   };
-  console.log(secondsStyle, minutesStyle, hoursStyle);
+
   return (
     <div>
       <h2>Analog Clock</h2>
